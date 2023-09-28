@@ -1,30 +1,38 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  
+    <button @click="get">get user</button>
+    <button @click="logout">logout</button>
+    <RouterView></RouterView>
+
 </template>
+
+<script setup>
+import { signOut } from 'firebase/auth'
+import { auth } from '@/firebase'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const logout = () => {
+  signOut(auth) 
+  router.push('auth')
+}
+
+
+const get = () => {
+  if (auth.currentUser) {
+  
+    console.log(`user name = ${auth.currentUser.displayName}`)
+    console.log(`user id = ${auth.currentUser.uid}`)
+  } else {
+    console.log(`logged user = false`)
+  }
+
+}
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  width: 100%;
+  height: 100%;
 }
 </style>
