@@ -3,7 +3,7 @@
     <MyInput v-model="name" type="text" :charactersMaxCount="50" placeholder="name" />
     <MyInput v-model="email" type="email" :charactersMaxCount="50" placeholder="email" />
     <MyInput v-model="password" type="password" :charactersMaxCount="50" placeholder="password" />
-    <MyButton @click="register">Join now</MyButton>
+    <MyButton class="button" @click="register">Join now</MyButton>
     <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
   </div>
 </template>

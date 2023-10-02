@@ -14,7 +14,8 @@ body {
   color: $font-color-primary;
   width: 100%;
   height: 100%;
-  background-color: $bg-primary;
+  background: $bg-primary;
+ background-repeat: no-repeat;
 }
 
 
@@ -25,4 +26,19 @@ a {
 
 .error {
   color: $font-color-error;
+}
+
+.button {
+  padding: 10px 15px;
+  border: 1px solid $border-primary;
+  border-radius: 7px;
+  background-color: $bg-secondary;
+
+  &:hover {
+    background-color: $bg-button-hover;
+  }
+
+  &:active {
+    background-color: $bg-button-active;
+  }
 }

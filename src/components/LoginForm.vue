@@ -3,8 +3,8 @@
     <MyInput v-model="email" type="email" :charactersMaxCount="50" placeholder="email" />
     <MyInput v-model="password" type="password" :charactersMaxCount="50" placeholder="password" />
     <div class="login-form__buttons">
-      <MyButton class="login-form__button" @click="login">Login</MyButton>
-      <MyButton class="login-form__button" @click="$router.push({ path: '/register' })">Register</MyButton>
+      <MyButton class="button login-form__button" @click="logIn">Login</MyButton>
+      <MyButton class="button login-form__button" @click="$router.push({ path: '/register' })">Register</MyButton>
     </div>
     <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
   </div>
@@ -23,7 +23,7 @@ const email = ref('van@mail.ru');
 const password = ref('12345678909876');
 const errorMessage = ref();
 
-const login = async () => {
+const logIn = async () => {
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value)
       .then(() => {

@@ -2,9 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '@/views/AuthView.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import RegisterForm from '@/components/RegisterForm.vue'
-import ProjectsView from '@/views/ProjectsView.vue'
-import TasksView from '@/views/TasksView.vue'
-import UsersView from '@/views/UsersView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import PostsView from '@/views/PostsView.vue'
 import { getUser } from '@/firebase/userAuthState'
 
 const routes = [
@@ -30,24 +29,20 @@ const routes = [
     name: 'mainview',
     path: '/',
     component: (() => import('@/views/MainView.vue')),
+    redirect: '/posts',
     meta: {
       requiredAuth: true
     },
     children: [
       {
-        name: 'projectsview',
-        path: '/projects',
-        component: ProjectsView,
+        name: 'postsview',
+        path: '/posts',
+        component: PostsView,
       },
       {
-        name: 'tasksview',
-        path: '/tasks',
-        component: TasksView
-      },
-      {
-        name: 'usersview',
-        path: '/users',
-        component: UsersView
+        name: 'profileview',
+        path: '/profile',
+        component: ProfileView
       },
     ]
   },

@@ -1,7 +1,7 @@
 <template>
   
-    <button @click="get">get user</button>
-    <button @click="logout">logout</button>
+    <!-- <button @click="get">get user</button>
+    <button @click="logout">logout</button> -->
     <RouterView></RouterView>
 
 </template>
@@ -11,11 +11,6 @@ import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const logout = () => {
-  signOut(auth) 
-  router.push('auth')
-}
 
 
 const get = () => {
