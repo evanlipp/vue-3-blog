@@ -11,3 +11,9 @@ const click = () => {
   emit('click')
 }
 </script>
+
+<style lang="scss" scoped>
+button {
+  font: inherit;
+}
+</style>
