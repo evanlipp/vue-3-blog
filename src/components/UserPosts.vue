@@ -16,7 +16,6 @@ onSnapshot(doc(dataBase, "users", auth.currentUser.uid), (doc) => {
   const data = Object.values(doc.data());
   userPosts.value = data
 })
-
 </script>
 
 <style lang="scss"></style>
