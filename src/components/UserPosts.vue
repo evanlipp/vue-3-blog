@@ -10,7 +10,6 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { dataBase, auth } from '@/firebase';
 import { ref } from 'vue';
 
-
 const userPosts = ref()
 
 onSnapshot(doc(dataBase, "users", auth.currentUser.uid), (doc) => {
@@ -18,14 +17,6 @@ onSnapshot(doc(dataBase, "users", auth.currentUser.uid), (doc) => {
   userPosts.value = data
 })
 
-
-
-
-
-
-
 </script>
-
-
 
 <style lang="scss"></style>
