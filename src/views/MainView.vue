@@ -6,20 +6,27 @@
       <h1 class="logo">blog,</h1>
       <router-link class="navigation__link" to="profile">My profile</router-link>
       <router-link class="navigation__link" to="posts" >My posts</router-link>
-      <MyButton class="navigation__link">New post</MyButton>
+      <MyButton class="navigation__link" @click="isVisible = !isVisible">New post</MyButton>
       <router-link class="navigation__link" to="auth" @click="logOut">Quit</router-link>
     </div>
     <div class="content">
       <router-view></router-view>
     </div>
   </div>
+  <MyModal :visibility="isVisible" @hideModal="isVisible = !isVisible">
+    <NewPostForm @hideModal="isVisible = !isVisible"/>
+  </MyModal>
 </template>
 
 <script setup>
 import MyButton from '@/components/UI/MyButton';
+import MyModal from '@/components/UI/MyModal';
+import NewPostForm from '@/components/NewPostForm';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/firebase';
 import { ref } from 'vue';
+
+const isVisible = ref(false)
 
 const logOut = () => {
   signOut(auth)
