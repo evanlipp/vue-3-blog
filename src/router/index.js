@@ -3,7 +3,7 @@ import AuthView from '@/views/AuthView.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import RegisterForm from '@/components/RegisterForm.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import PostsView from '@/views/PostsView.vue'
+import UserPosts from '@/components/UserPosts.vue'
 import { getUser } from '@/firebase/userAuthState'
 
 const routes = [
@@ -35,9 +35,9 @@ const routes = [
     },
     children: [
       {
-        name: 'postsview',
+        name: 'userposts',
         path: '/posts',
-        component: PostsView,
+        component: UserPosts,
       },
       {
         name: 'profileview',

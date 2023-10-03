@@ -1,7 +1,7 @@
 <template>
   
-    <!-- <button @click="get">get user</button>
-    <button @click="logout">logout</button> -->
+    <button @click="get">get user</button>
+    <button @click="logout">logout</button>
     <RouterView></RouterView>
 
 </template>

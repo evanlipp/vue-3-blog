@@ -1,9 +1,11 @@
 <template>
   <div class="main">
     <div class="navigation">
+      <button @click="add">add</button>
+      <button @click="get">get</button>
       <h1 class="logo">blog,</h1>
       <router-link class="navigation__link" to="profile">My profile</router-link>
-      <router-link class="navigation__link" to="posts">My posts</router-link>
+      <router-link class="navigation__link" to="posts" >My posts</router-link>
       <MyButton class="navigation__link">New post</MyButton>
       <router-link class="navigation__link" to="auth" @click="logOut">Quit</router-link>
     </div>
@@ -17,10 +19,31 @@
 import MyButton from '@/components/UI/MyButton';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/firebase';
+import { ref } from 'vue';
 
 const logOut = () => {
   signOut(auth)
 }
+
+import { dataBase } from '@/firebase';
+import { collection, addDoc, doc, setDoc, updateDoc, serverTimestamp, getDoc, getDocs, onSnapshot } from "firebase/firestore"; 
+
+
+
+const get = async () => {
+  const docref = await getDoc(doc(dataBase, "users", auth.currentUser.uid))
+  const res = docref.data()
+  console.log(Object.values(res))
+}
+
+
+
+const add = async () => {
+  await setDoc(doc(dataBase, 'users', auth.currentUser.uid ), {first: {title: 'bh', desc: 'bhb'}, second: {title: 'bbhbh', desc: 'bhoob'}})
+  
+}
+
+
 </script>
 
 <style lang="scss" scoped>

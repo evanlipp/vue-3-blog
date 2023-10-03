@@ -15,6 +15,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '@/firebase'
+import { setDoc, doc } from 'firebase/firestore'
+import { dataBase } from '@/firebase'
 
 const router = useRouter();
 const name = ref('');
@@ -29,10 +31,13 @@ const register = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email.value, password.value)
         .then(() => {
-          alert('You have an account now!')
+          updateProfile(auth.currentUser, { displayName: `${name.value}` })
         })
         .then(() => {
-          updateProfile(auth.currentUser, { displayName: `${name.value}` })
+          setDoc(doc(dataBase, 'users', auth.currentUser.uid), {})
+        })
+        .then(() => {
+          alert('You have an account now!')
         })
         .then(() => {
           router.push({ path: '/' })
@@ -56,6 +61,8 @@ const register = async () => {
               break;
           }
         })
+      await setDoc(doc(dataBase, 'users', auth.currentUser.uid), { posts: [] }
+      )
     } catch {
       alert('something go wrong')
     }

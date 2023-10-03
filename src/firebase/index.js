@@ -1,15 +1,16 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseApp = initializeApp({
-  apiKey: 'AIzaSyC1Og4L7g5q1HuK098sh6vtal-35X0e9XI',
-  authDomain: 'task-tracker-sp.firebaseapp.com',
-  projectId: 'task-tracker-sp',
-  storageBucket: 'task-tracker-sp.appspot.com',
-  messagingSenderId: '770983742362',
-  appId: '1:770983742362:web:d54816421e0e286a06c823'
+  apiKey: "AIzaSyCVBY-KesOi-JeJGmLJNDIuhsemXOsZqEk",
+  authDomain: "pet-project-c506c.firebaseapp.com",
+  projectId: "pet-project-c506c",
+  storageBucket: "pet-project-c506c.appspot.com",
+  messagingSenderId: "72062101010",
+  appId: "1:72062101010:web:baa6e0b89be02ff00fdacb"
 })
 
 export const auth = getAuth(firebaseApp)
-
+export const dataBase = getFirestore(firebaseApp)
 
