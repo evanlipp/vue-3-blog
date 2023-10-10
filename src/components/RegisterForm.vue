@@ -61,8 +61,6 @@ const register = async () => {
               break;
           }
         })
-      await setDoc(doc(dataBase, 'users', auth.currentUser.uid), { posts: [] }
-      )
     } catch {
       alert('something go wrong')
     }

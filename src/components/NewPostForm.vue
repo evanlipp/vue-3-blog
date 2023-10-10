@@ -41,6 +41,7 @@ const createPost = async () => {
 
     const newPost = {}
     newPost[currentDate] = {
+      id: currentDate,
       title: post.value.title,
       body: post.value.body,
       creationDate: creationDate,
@@ -48,7 +49,6 @@ const createPost = async () => {
     }
 
     await setDoc(doc(dataBase, "users", auth.currentUser.uid), newPost, {merge: true});
-    
   }
 }
 
