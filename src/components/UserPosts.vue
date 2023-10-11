@@ -1,15 +1,15 @@
 <template>
   <div class="post-list">
-    <div v-if="userPosts === undefined">
-      <p>Loading posts...</p>
+    <div class="post-list__title-wrapper" v-if="userPosts === undefined">
+      <p class="post-list__title">Loading posts...</p>
     </div>
     <div class="post-list__wrapper" v-else-if="userPosts.length > 0">
       <TransitionGroup name="post-list">
         <PostItem v-for="post in userPosts" :key="post.id" :post="post" />
       </TransitionGroup>
     </div>
-    <div v-else>
-      <p class="post-list__subtitle">Create your first post</p>
+    <div class="post-list__title-wrapper" v-else>
+      <p class="post-list__title">Create your first post</p>
     </div>
   </div>
 </template>
@@ -34,6 +34,19 @@ onSnapshot(fetchOptions, (querySnapshot) => {
 
 <style lang="scss" scoped>
 .post-list {
+  height: 100%;
+
+  &__title-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
