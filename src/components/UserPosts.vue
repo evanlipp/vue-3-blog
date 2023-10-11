@@ -3,27 +3,55 @@
     <div v-if="userPosts === undefined">
       <p>Loading posts...</p>
     </div>
-    <div class="post-list_wrapper" v-else-if="userPosts.length > 0">
-      <PostItem v-for="post in userPosts" :key="post.id" :post="post"/>
+    <div class="post-list__wrapper" v-else-if="userPosts.length > 0">
+      <TransitionGroup name="post-list">
+        <PostItem v-for="post in userPosts" :key="post.id" :post="post" />
+      </TransitionGroup>
     </div>
     <div v-else>
-      <p class="post-list_subtitle">Create your first post</p>
+      <p class="post-list__subtitle">Create your first post</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { doc, onSnapshot } from 'firebase/firestore';
-import { dataBase, auth } from '@/firebase';
 import { ref } from 'vue';
 import PostItem from '@/components/PostItem.vue';
+import { auth, dataBase } from '@/firebase/init';
+import { onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 
 const userPosts = ref();
 
-onSnapshot(doc(dataBase, "users", auth.currentUser.uid), (doc) => {
-  const data = Object.values(doc.data());
-  userPosts.value = data;
+const fetchOptions = query(collection(dataBase, auth.currentUser.uid), orderBy('id'));
+onSnapshot(fetchOptions, (querySnapshot) => {
+  let fetchedPosts = [];
+  querySnapshot.forEach((doc) => {
+    fetchedPosts.push(doc.data())
+  })
+  userPosts.value = fetchedPosts.reverse();
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.post-list {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.post-list-enter-active,
+.post-list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.post-list-enter-from,
+.post-list-leave-to {
+  opacity: 0;
+}
+
+.post-list-move {
+  transition: transform 0.8s ease;
+}
+</style>
