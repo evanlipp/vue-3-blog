@@ -3,38 +3,33 @@
     <MyInput v-model="name" type="text" :charactersMaxCount="50" placeholder="name" />
     <MyInput v-model="email" type="email" :charactersMaxCount="50" placeholder="email" />
     <MyInput v-model="password" type="password" :charactersMaxCount="50" placeholder="password" />
-    <MyButton class="button" @click="register">Join now</MyButton>
+    <MyButton class="button button__primary" @click="register">Join now</MyButton>
     <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
   </div>
 </template>
 
 <script setup>
-import MyInput from '@/components/UI/MyInput'
-import MyButton from '@/components/UI/MyButton'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth } from '@/firebase'
-import { setDoc, doc } from 'firebase/firestore'
-import { dataBase } from '@/firebase'
+import MyInput from '@/components/UI/MyInput';
+import MyButton from '@/components/UI/MyButton';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '@/firebase/init';
 
 const router = useRouter();
 const name = ref('');
 const email = ref('');
 const password = ref('');
-const errorMessage = ref();
+const errorMessage = ref('');
 
 const register = async () => {
-  if (name.value === '') {
+  if (name.value === '' || name.value.trim() === '') {
     errorMessage.value = 'Enter your name';
   } else {
     try {
       await createUserWithEmailAndPassword(auth, email.value, password.value)
         .then(() => {
           updateProfile(auth.currentUser, { displayName: `${name.value}` })
-        })
-        .then(() => {
-          setDoc(doc(dataBase, 'users', auth.currentUser.uid), {})
         })
         .then(() => {
           alert('You have an account now!')
@@ -70,8 +65,6 @@ const register = async () => {
 
 <style lang="scss" scoped>
 .register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  @extend %auth-form;
 }
 </style>
