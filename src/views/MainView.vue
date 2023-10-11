@@ -84,6 +84,8 @@ const logOut = () => {
 
 .content {
   width: 100%;
+  padding: 10px;
+  overflow: scroll;
   border-radius: 7px;
   box-shadow: 0px 0px 53px -22px rgba(1, 11, 0, 0.22);
   background-color: $bg-secondary;
