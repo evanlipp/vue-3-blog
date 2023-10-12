@@ -19,6 +19,8 @@ const updateInput = (event) => {
 
 <style lang="scss" scoped>
 .input {
+  font: inherit;
+  color: inherit;
   width: 100%;
   padding: 10px 15px;
   border: 1px solid $border-primary;

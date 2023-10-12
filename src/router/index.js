@@ -1,10 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import AuthView from '@/views/AuthView.vue'
-import LoginForm from '@/components/LoginForm.vue'
-import RegisterForm from '@/components/RegisterForm.vue'
-import ProfileView from '@/views/ProfileView.vue'
-import UserPosts from '@/components/UserPosts.vue'
-import { getUser } from '@/firebase/userAuthState'
+import { createRouter, createWebHistory } from 'vue-router';
+import AuthView from '@/views/AuthView.vue';
+import LoginForm from '@/components/LoginForm.vue';
+import RegisterForm from '@/components/RegisterForm.vue';
+import { getUser } from '@/firebase/userAuthState';
 
 const routes = [
   {
@@ -28,7 +26,7 @@ const routes = [
   {
     name: 'mainview',
     path: '/',
-    component: (() => import('@/views/MainView.vue')),
+    component: (() => import('@/views/MainView')),
     redirect: '/posts',
     meta: {
       requiredAuth: true
@@ -37,23 +35,29 @@ const routes = [
       {
         name: 'userposts',
         path: '/posts',
-        component: UserPosts,
+        component: (() => import('@/components/UserPosts')),
       },
       {
-        name: 'profileview',
+        name: 'userprofile',
         path: '/profile',
-        component: ProfileView
+        component: (() => import('@/components/UserProfile')),
       },
     ]
   },
+  {
+    name: 'postview',
+    path: '/:id',
+    component: (() => import('@/views/PostView')),
+    meta: {
+      requiredAuth: true
+    }
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-
 })
-
 
 router.beforeEach(async (to) => {
   const user = await getUser()

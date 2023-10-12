@@ -1,8 +1,5 @@
-import { ref } from "vue"
-import { auth } from "@/firebase"
-import { onAuthStateChanged } from "firebase/auth"
-
-export const user = ref()
+import { auth } from "@/firebase/init";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const getUser = () => {
   return new Promise((resolve, reject) => {

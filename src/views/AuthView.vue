@@ -1,18 +1,18 @@
 <template>
   <div class="auth">
     <div class="auth__link-wrapper">
-      <RouterLink class="auth__link" to="login">Login</RouterLink>
-      <RouterLink class="auth__link" to="register">SignUp</RouterLink>
+      <router-link class="auth__link" to="login">Login</router-link>
+      <router-link class="auth__link" to="register">SignUp</router-link>
     </div>
     <div class="auth__inputs-wrapper">
-      <RouterView />
+      <router-view />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .auth {
-  height: 100%;
+  height: 100vh;
   display: grid;
   grid-template-rows: 0.8fr 1.2fr;
   row-gap: 30px;

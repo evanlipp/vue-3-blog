@@ -66,6 +66,7 @@ const deletePost = async () => {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-align: justify;
 
     @media (max-width: 520px) {
       font-size: 10px;

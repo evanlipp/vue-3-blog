@@ -4,15 +4,9 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100vh;
-}
-
 body {
   font: $font-primary;
   color: $font-color-primary;
-  color: red;
-  height: 100%;
   background: $bg-primary;
   background-repeat: no-repeat;
 }

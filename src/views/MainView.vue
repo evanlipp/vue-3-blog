@@ -36,10 +36,8 @@ const logOut = () => {
 
 <style lang="scss" scoped>
 .main {
-  max-width: 1240px;
-  height: 100%;
-  padding: 50px 20px;
-  margin: auto;
+  @extend %container;
+  height: 100vh;
   display: flex;
   gap: 60px;
 
@@ -83,6 +81,9 @@ const logOut = () => {
 }
 
 .content {
+  height: fit-content;
+  max-height: 100%;
+  min-height: 230px;
   width: 100%;
   padding: 10px;
   overflow: scroll;

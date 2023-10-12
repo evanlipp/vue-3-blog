@@ -19,6 +19,8 @@ const updateInput = (event) => {
 
 <style lang="scss" scoped>
 .textarea {
+  font: inherit;
+  color: inherit;
   width: 100%;
   height: 140px;
   padding: 10px 15px;

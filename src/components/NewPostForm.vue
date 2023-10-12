@@ -1,10 +1,10 @@
 <template>
   <div class="form">
-    <MyInput v-model="post.title" type="text" placeholder="Post title"></MyInput>
+    <MyInput v-model="post.title" type="text" placeholder="Post title" :charactersMaxCount="80"></MyInput>
     <MyTextarea v-model="post.body" type="text" placeholder="Post body"></MyTextarea>
     <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
-    <MyButton class="button" @click="createPost">Publish</MyButton>
-    <MyButton class="button" @click="hideModal">Cancel</MyButton>
+    <MyButton class="button button__primary" @click="createPost">Publish</MyButton>
+    <MyButton class="button button__primary" @click="hideModal">Cancel</MyButton>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ import MyInput from '@/components/UI/MyInput';
 import MyButton from '@/components/UI/MyButton';
 import MyTextarea from '@/components/UI/MyTextarea';
 import { ref } from 'vue';
-import { auth, dataBase } from '@/firebase';
+import { auth, dataBase } from '@/firebase/init';
 import { setDoc, doc } from 'firebase/firestore';
 
 const errorMessage = ref()
@@ -36,24 +36,25 @@ const createPost = async () => {
     errorMessage.value = 'Enter post body';
   } else {
     const currentDate = Date.now()
-    const date = new Date(currentDate)
-    const creationDate = date.toLocaleDateString('ru-RU', { hour: "numeric", minute: "numeric" })
+    const creationDate = new Date(currentDate).toLocaleDateString('ru-RU', { hour: "numeric", minute: "numeric" })
 
-    const newPost = {}
-    newPost[currentDate] = {
+    const newPost = {
       id: currentDate,
       title: post.value.title,
       body: post.value.body,
       creationDate: creationDate,
-      author: auth.currentUser.email
+      authorEmail: auth.currentUser.email,
+      comments: [],
     }
 
-    await setDoc(doc(dataBase, "users", auth.currentUser.uid), newPost, {merge: true});
+    await setDoc(doc(dataBase, auth.currentUser.uid, `${currentDate}`), newPost);
   }
+  emit('hideModal')
 }
-
 </script>
 
 <style lang="scss" scoped>
-.form {}
+.form {
+  @extend %modal-form;
+}
 </style>

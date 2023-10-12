@@ -3,3 +3,15 @@
   flex-direction: column;
   gap: 20px;
 }
+
+%container {
+  max-width: 1240px;
+  padding: 50px 20px;
+  margin: auto;
+}
+
+%modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

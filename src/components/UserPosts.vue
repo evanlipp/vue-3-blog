@@ -1,6 +1,6 @@
 <template>
   <div class="post-list">
-    <div class="post-list__title-wrapper" v-if="userPosts === undefined">
+    <div class="post-list__plug" v-if="userPosts === undefined">
       <p class="post-list__title">Loading posts...</p>
     </div>
     <div class="post-list__wrapper" v-else-if="userPosts.length > 0">
@@ -8,7 +8,7 @@
         <PostItem v-for="post in userPosts" :key="post.id" :post="post" />
       </TransitionGroup>
     </div>
-    <div class="post-list__title-wrapper" v-else>
+    <div class="post-list__plug" v-else>
       <p class="post-list__title">Create your first post</p>
     </div>
   </div>
@@ -36,15 +36,19 @@ onSnapshot(fetchOptions, (querySnapshot) => {
 .post-list {
   height: 100%;
 
-  &__title-wrapper {
-    height: 100%;
+  &__plug {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 210px;
   }
 
   &__title {
     font-size: 20px;
+
+    @media (max-width: 520px) {
+      font-size: 14px;
+    }
   }
 
   &__wrapper {

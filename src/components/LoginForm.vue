@@ -3,8 +3,8 @@
     <MyInput v-model="email" type="email" :charactersMaxCount="50" placeholder="email" />
     <MyInput v-model="password" type="password" :charactersMaxCount="50" placeholder="password" />
     <div class="login-form__buttons-wrapper">
-      <MyButton class="button button__primary login-form__button" @click="logIn">Login</MyButton>
-      <MyButton class="button button__primary login-form__button" @click="$router.push({ path: '/register' })">SignUp
+      <MyButton class="button button__primary button__primary_wide" @click="logIn">Login</MyButton>
+      <MyButton class="button button__primary button__primary_wide" @click="$router.push({ path: '/register' })">SignUp
       </MyButton>
     </div>
     <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
@@ -65,10 +65,6 @@ const logIn = async () => {
   &__buttons-wrapper {
     display: flex;
     gap: 30px;
-  }
-
-  &__button {
-    width: 100%;
   }
 }
 </style>
