@@ -20,8 +20,8 @@ import { auth } from '@/firebase/init';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const email = ref('van@mail.ru');
-const password = ref('12345678909876');
+const email = ref('');
+const password = ref('');
 const errorMessage = ref('');
 
 const logIn = async () => {

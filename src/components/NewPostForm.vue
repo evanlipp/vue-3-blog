@@ -25,8 +25,8 @@ const hideModal = () => {
 }
 
 const post = ref({
-  title: 'j',
-  body: 'k'
+  title: '',
+  body: ''
 })
 
 const createPost = async () => {
