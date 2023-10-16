@@ -7,8 +7,12 @@ export default createStore({
   }),
   getters: {
     getCurrentTime(state) {
-      const date = new Date(state.currentTime)
-      return date.toLocaleTimeString('ru-RU', { hour: "numeric", minute: "numeric" })
+      if (state.currentTime) {
+        const date = new Date(state.currentTime)
+        return date.toLocaleTimeString('ru-RU', { hour: "numeric", minute: "numeric" })
+      } else {
+        return "loading..."
+      }
     }
   },
   mutations: {
@@ -17,16 +21,13 @@ export default createStore({
     }
   },
   actions: {
-    async fetchCurrentTime({commit}) {
-      const datetime = await axios('http://worldtimeapi.org/api/timezone/Europe/Moscow')
-      .then((response) => {
+    async fetchCurrentTime({ commit }) {
+      try {
+        const response = await axios('http://worldtimeapi.org/api/timezone/Europe/Moscow');
         commit('setCurrentTime', response.data.datetime)
-      })
-      .catch(() => {
-        commit('setCurrentTime', 'Sorry, time server is not available')
-      })
+      } catch {
+        commit('setCurrentTime', null)
+      }
     }
   },
-  modules: {
-  }
 })
