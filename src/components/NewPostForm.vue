@@ -15,28 +15,31 @@ import MyTextarea from '@/components/UI/MyTextarea';
 import { ref } from 'vue';
 import { auth, dataBase } from '@/firebase/init';
 import { setDoc, doc } from 'firebase/firestore';
+import { isStringEmpty } from '@/helpers/stringChecker';
 
-const errorMessage = ref()
+const errorMessage = ref();
 
-const emit = defineEmits(['hideModal'])
+const emit = defineEmits(['hideModal']);
 
 const hideModal = () => {
   emit('hideModal')
-}
+};
 
 const post = ref({
   title: '',
   body: ''
-})
+});
 
 const createPost = async () => {
-  if (post.value.title === '' || post.value.title.trim() === '') {
+  if (isStringEmpty(post.value.title)) {
     errorMessage.value = 'Enter post title';
-  } else if (post.value.body === '' || post.value.body.trim() === '') {
+    return
+  } else if (isStringEmpty(post.value.body)) {
     errorMessage.value = 'Enter post body';
+    return
   } else {
-    const currentDate = Date.now()
-    const creationDate = new Date(currentDate).toLocaleDateString('ru-RU', { hour: "numeric", minute: "numeric" })
+    const currentDate = Date.now();
+    const creationDate = new Date(currentDate).toLocaleDateString('ru-RU', { hour: "numeric", minute: "numeric" });
 
     const newPost = {
       id: currentDate,
@@ -45,9 +48,9 @@ const createPost = async () => {
       creationDate: creationDate,
       authorEmail: auth.currentUser.email,
       comments: [],
-    }
+    };
 
-    await setDoc(doc(dataBase, auth.currentUser.uid, `${currentDate}`), newPost);
+    await setDoc(doc(dataBase, auth.currentUser.uid, `${currentDate}`), newPost)
   }
   emit('hideModal')
 }

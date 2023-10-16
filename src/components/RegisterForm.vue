@@ -15,6 +15,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '@/firebase/init';
+import { isStringEmpty } from '@/helpers/stringChecker';
 
 const router = useRouter();
 const name = ref('');
@@ -23,7 +24,7 @@ const password = ref('');
 const errorMessage = ref('');
 
 const register = async () => {
-  if (name.value === '' || name.value.trim() === '') {
+  if (isStringEmpty(name.value)) {
     errorMessage.value = 'Enter your name';
   } else {
     try {
